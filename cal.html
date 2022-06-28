@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang = "ja">
+<head>
+    <meta charset="utf-8">
+    <title>電卓</title>
+    <link rel = "stylesheet" href="cal.css">
+</head>
+<body>
+    <div class ="base">
+        <div>
+            <h2>Calculator</h2>
+        </div>
+        <div class="device">
+            <div>
+
+            </div>
+            <div>
+                <input readonly id="anser" type="text" value="0">
+            </div>
+            <div>
+                <input type="button" class="botan" value="(" onclick="kk(this)"> 
+                <input type="button" class="botan" value=")" onclick="kk(this)">
+                <input type="button" class="botan" value="^" onclick="ope(this)"> 
+                <input type="button" class="botan" value="AC" onclick="ac()">
+            </div>
+            <div>
+                <input type="button" class="botan" value="7" onclick="cal(this)">
+                <input type="button" class="botan" value="8" onclick="cal(this)">
+                <input type="button" class="botan" value="9" onclick="cal(this)">
+                <input type="button" class="botan" value="×" onclick="ope(this)"> 
+            </div>
+            <div>
+                <input type="button" class="botan" value="4" onclick="cal(this)">
+                <input type="button" class="botan" value="5" onclick="cal(this)">
+                <input type="button" class="botan" value="6" onclick="cal(this)">
+                <input type="button" class="botan" value="-" onclick="ope(this)"> 
+            </div>
+            <div>
+                <input type="button" class="botan" value="1" onclick="cal(this)">
+                <input type="button" class="botan" value="2" onclick="cal(this)">
+                <input type="button" class="botan" value="3" onclick="cal(this)">
+                <input type="button" class="botan" value="+" onclick="ope(this)"> 
+            </div>
+            <div>
+                <input type="button" class="botan" value="0" onclick="cal(this)">
+                <input type="button" class="botan" value="." onclick="ten(this)">
+                <input type="button" class="botan" value="=" onclick="ans()">
+                <input type="button" class="botan" value="÷" onclick="ope(this)">   
+            </div>
+        </div>
+    </div>
+    <script>
+        var shiki = document.getElementById("anser")
+        var click_cal = false;
+        var click_ope = true;
+        let kk_count = 0;
+
+        function ac(){
+            shiki.value = 0;
+            if(click_cal == true){click_cal=false;}
+            click_cal = false;
+            click_ope = true;
+            kk_count = 0;
+        }
+        function cal(num){
+            if (shiki.value == 0 || shiki.value =="ERROR"){
+                shiki.value = "";
+            }
+            shiki.value = shiki.value + num.value;
+            if(click_cal == false){click_cal=true;}
+        }
+        function ope(num){
+            if (click_cal == true){
+                    shiki.value = shiki.value + num.value;
+                    click_cal = false;
+                    click_ope = true;
+             }  
+        }
+        function ans(){
+            if (click_cal == true){
+                for(let i=0;i<kk_count;i++){
+                    shiki.value = shiki.value + ")";
+                }
+                kk_count = 0;
+                shiki.value = shiki.value.replaceAll('×','*').replaceAll('÷','/').replaceAll('^','**');
+                try {
+                    shiki.value = eval(shiki.value);
+                }catch{
+                    shiki.value = "ERROR";
+                    click_cal = false;
+                    click_ope = true;
+                }
+            }
+        }
+        function kk(num){
+            if (num.value == "("){
+                if(click_ope == true){
+                    if (shiki.value == 0 || shiki.value =="ERROR"){shiki.value = "";}
+                    shiki.value = shiki.value + num.value;
+                    kk_count++;
+                    click_cal = false;
+
+                }
+            }else{
+                if(kk_count != "0" && click_cal == true ){
+                    shiki.value = shiki.value + num.value;
+                    kk_count--;
+                }
+            }
+        }
+        function ten(num){
+            if(click_cal==true && click_ope==true){
+                shiki.value = shiki.value + num.value;
+                click_cal = false;
+                click_ope = false;
+            }
+        }
+    </script>
+
+</body>
+</html>

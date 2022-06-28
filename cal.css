@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.base{
+    width: 300px;
+    height: 400px;
+    border : solid 1px #333 ; 
+    border-radius: 10px;
+    background-color:#0F0;
+}
+
+h2{
+    color: #fff;
+    -webkit-text-stroke: 0.5px #000;
+    text-align: reft;
+}
+
+.device{
+    text-align: center;
+}
+
+.botan {
+    width: 45px;
+    height: 45px;
+    margin : 5px ;
+    border: none;
+    border-radius: 25px;
+    border : solid 1px #333 ;
+    color: #fff;
+    background-color:#7fff00;
+}
+.botan:hover{
+    background:#7fffd4;
+
+}
+
+.botan:active{
+    background:#008000;
+}
+
+#anser{
+    width:250px;
+    height:50;
+    margin : 5px ;
+}
